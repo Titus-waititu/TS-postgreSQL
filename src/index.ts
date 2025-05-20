@@ -9,17 +9,17 @@ import { query, insertMultipleproducts, insertOneProduct, Tproduct, Torders, del
         await initializeTables();
 
         // 2. Insert a test product
-        const productId = await insertOneProduct({ product_id: 1, name: 'Headphones', stock_quantity: 100, price:150 });
+        const productId = await insertOneProduct({ name: 'Headphones', stock_quantity: 100, price:150 });
         console.log(`Inserted product with ID: ${productId}`);
 
         // 3. Insert multiple products with a transaction
         const productsToInsert: Tproduct[] = [
-            { product_id: 2, name: 'Speaker', stock_quantity: 200, price:200 },
-            { product_id: 3, name: 'Amplifier', stock_quantity: 50, price:250 },
-            { product_id: 4, name: 'Phones', stock_quantity: 60, price:300 },
-            { product_id: 5, name: 'Laptop', stock_quantity: 90, price:350 },
-            { product_id: 6, name: 'Chargers', stock_quantity: 150, price:400 },
-            { product_id: 7, name: 'adapters', stock_quantity: 300, price:500 },
+            { name: 'Speaker', stock_quantity: 200, price:200 },
+            {  name: 'Amplifier', stock_quantity: 50, price:250 },
+            {  name: 'Phones', stock_quantity: 60, price:300 },
+            {  name: 'Laptop', stock_quantity: 90, price:350 },
+            {  name: 'Chargers', stock_quantity: 150, price:400 },
+            {  name: 'adapters', stock_quantity: 300, price:500 },
         ];
         await insertMultipleproducts(productsToInsert);
         
@@ -40,6 +40,7 @@ import { query, insertMultipleproducts, insertOneProduct, Tproduct, Torders, del
 
         // 5. Delete all products
         // await deleteAllProducts();
+        
 
         console.log('All operations completed successfully');
     } catch (error) {

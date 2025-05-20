@@ -1,7 +1,7 @@
 import db, { executeQuery } from "../config/database";
 
 export interface Tproduct {
-    product_id: number;
+    product_id?: number;
     name: string;
     stock_quantity: number;
     price:number;
@@ -15,12 +15,13 @@ export interface Torders{
      order_date: Date;
 }
 
+
 // Insert a single product into the database
 export const insertOneProduct = async (product: Tproduct): Promise<number | undefined> => {
     try {
         const res = await executeQuery(
-            'INSERT INTO products (product_id, name, stock_quantity,price) VALUES ($1, $2, $3, $4 ) RETURNING product_id',
-            [product.product_id, product.name, product.stock_quantity, product.price]
+            'INSERT INTO products (name, stock_quantity, price) VALUES ($1, $2, $3) RETURNING product_id',
+            [product.name, product.stock_quantity, product.price]
         );
         const insertedId = res.rows[0]?.product_id;
         console.log(`Product inserted with ID: ${insertedId}`);
@@ -30,7 +31,6 @@ export const insertOneProduct = async (product: Tproduct): Promise<number | unde
         throw err;
     }
 }
-
 // Insert multiple products in a transaction
 export const insertMultipleproducts = async (products: Tproduct[]): Promise<void> => {
     const client = await db.getPool().connect();
@@ -38,8 +38,8 @@ export const insertMultipleproducts = async (products: Tproduct[]): Promise<void
         await client.query('BEGIN');
         for (const product of products) {
             await client.query(
-            'INSERT INTO products (product_id, name, stock_quantity,price) VALUES ($1, $2, $3, $4 ) RETURNING product_id',
-            [product.product_id, product.name, product.stock_quantity, product.price]
+            'INSERT INTO products (name, stock_quantity,price) VALUES ($1, $2, $3 ) RETURNING product_id',
+            [product.name, product.stock_quantity, product.price]
             );
         }
         await client.query('COMMIT');
