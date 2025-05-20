@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es5",                       // Target JavaScript version (ES5 for wide compatibility)
+    "module": "commonjs",                   // Module system (CommonJS for Node.js)
+    "strict": true,                         // Enable strict type-checking options
+    "esModuleInterop": true,                // Allows default imports from CommonJS modules
+    "jsx": "react",                         // Enable JSX support for React in .tsx files
+    "skipLibCheck": true,                   // Skip type checking of declaration files
+    "outDir": "./dist",                     // Output directory for compiled JavaScript
+    "rootDir": "./src",                     // Root directory for source files
+    "forceConsistentCasingInFileNames": true // Ensure consistent casing in file names
+  },
+  "include": [
+    "src/**/*.ts",    // Include all .ts files
+    "src/**/*.tsx"    // Include all .tsx files (for React)
+  ],
+  "exclude": [
+    "node_modules"    // Exclude node_modules from the compilation process
+  ]
+}
