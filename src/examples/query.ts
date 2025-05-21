@@ -29,6 +29,8 @@ export const insertProduct = async (product: TProduct): Promise<number> => {
     throw error;
   }
 };
+
+
 export const insertMultipleProducts = async (
   products: TProduct[]
 ): Promise<void> => {
@@ -53,6 +55,7 @@ export const insertMultipleProducts = async (
   }
 };
 
+
 export const insertOrder = async (order: TOrder): Promise<number> => {
   try {
     const { product_id, quantity_ordered, customer_name } = order;
@@ -66,6 +69,7 @@ export const insertOrder = async (order: TOrder): Promise<number> => {
     throw error;
   }
 };
+
 export const queryProducts = async (): Promise<TProduct[]> => {
   try {
     const result = await executeQuery("SELECT * FROM products");

@@ -27,11 +27,11 @@ import { nullifExample, caseExample, coalesceExample, castExample } from './exam
         // console.log('Inserted product with ID:', productId);
 
         // 4. nullifExample
-        const nullifResult = await nullifExample(1);
+        const nullifResult = await nullifExample(19);
         console.log('NULLIF Example Result:', nullifResult);
 
         // 5.castExample
-        const castResult = await castExample(1);
+        // const castResult = await castExample(1);
 
         console.log('All operations completed successfully');
     } catch (error) {
