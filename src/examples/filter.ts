@@ -26,4 +26,3 @@ export const filterOrdersByDate = async (startDate: string, endDate: string): Pr
     throw error;
   }
 };
-
