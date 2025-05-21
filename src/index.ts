@@ -1,6 +1,6 @@
 
 import { executeQuery, initializeTables } from './config/database';
-import { insertProduct, insertMultipleProducts, insertOrder,TProduct,TOrder,queryProducts } from './examples/query';
+import { insertProduct, insertMultipleProducts, insertOrder,TProduct,TOrder,queryProducts,getOrdersWithProductInfo,TorderWithProduct,TCustomer, insertCustomer, } from './examples/query';
 import { filterProductsByPrice, filterOrdersByDate } from './examples/filter';
 import { nullifExample, caseExample, coalesceExample, castExample } from './examples/conditional-operators';
 import {getSalesByGroupingSets, getSalesByRollup, getSalesByCube} from './examples/aggregationQueries';
@@ -39,11 +39,28 @@ import {getProductsAboveAveragePrice,getTopSellingProducts,getProductDetails} fr
             { order_id: 6, product_id: 6, quantity_ordered: 1, customer_name: 'Bruno', order_date: new Date('2025-04-11') },
             { order_id: 7, product_id: 7, quantity_ordered: 6, customer_name: 'Titus', order_date: new Date('2025-04-16') },
         ];
-        
-        // await insertMultipleProducts(productsToInsert);
+    
+        for (const order of ordersToAdd) {
+            await insertOrder(order);
+        }     
+        const customersToAdd: TCustomer[] = [
+            { customer_name:'mibey', email: 'mibey@example.com', phone: '22730173823', address: 'Mibey street', registered_at: new Date('2025-04-10') },
+            { customer_name:'bruno', email: 'bruno@example.com', phone: '22273017473', address: 'bruno street', registered_at: new Date('2025-04-10') },
+            { customer_name:'tito', email: 'tito@example.com', phone: '2730173213', address: 'tito street', registered_at: new Date('2025-04-10') },
+            { customer_name:'mkubwa', email: 'mkubwa@example.com', phone: '12273017382337', address: 'mkubwa street', registered_at: new Date('2025-04-10') },
+            { customer_name:'mike', email: 'mike@example.com', phone: '27301738233516', address: 'mike street', registered_at: new Date('2025-04-10') },
+            { customer_name:'james', email: 'james@example.com', phone: '227301738236371', address: 'james street', registered_at: new Date('2025-04-10') },
+            { customer_name:'final', email: 'final@example.com', phone: '227301738231238', address: 'final street', registered_at: new Date('2025-04-10') },
+        ];
+        for (const customer of customersToAdd) {
+            await insertCustomer(customer);
+        }
+        const customers = await(customersToAdd)
+        console.log('All customers in database:');
+        console.table(customers);
         // 4. Query all products to verify
         // const products = await queryProducts();
-        console.log('All products in database:');
+        // console.log('All products in database:');
         // console.table(products);
 
         // 5. Delete all products
