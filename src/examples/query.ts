@@ -17,21 +17,19 @@ export interface TOrder {
 }
 
 export const insertProduct = async (product: TProduct): Promise<number> => {
-  try {
+    try {
     const { name, price, stock_quantity } = product;
     const result = await executeQuery(
-      "INSERT INTO products (name, price, stock_quantity) VALUES ($1, $2, $3) RETURNING product_id",
-      [name, price, stock_quantity]
+        "INSERT INTO products (name, price, stock_quantity) VALUES ($1, $2, $3) RETURNING product_id",
+        [name, price, stock_quantity]
     );
     return result.rows[0].product_id;
-  } catch (error) {
+    } catch (error) {
     console.error("Error inserting product:", error);
     throw error;
   }
 };
-export const insertMultipleProducts = async (
-  products: TProduct[]
-): Promise<void> => {
+export const insertMultipleProducts = async (products: TProduct[]): Promise<void> => {
   const client = await db.getPool().connect();
   try {
     await client.query("BEGIN");
