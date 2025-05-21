@@ -51,25 +51,42 @@ class Database {
     
     async initializeTables(): Promise<void> {
         try {
+            await this.executeQuery(`
+              DROP TABLE IF EXISTS orders CASCADE;
+              DROP TABLE IF EXISTS products CASCADE;
+              DROP TABLE IF EXISTS customers CASCADE;
+           `);
+
             // create users table
             await this.executeQuery(`
-                CREATE TABLE IF NOT EXISTS products (
+                CREATE TABLE products (
                     product_id SERIAL PRIMARY KEY,
                     name VARCHAR(50) NOT NULL,
                     price VARCHAR(50) NOT NULL,
                     stock_quantity INT,
+                    
                     created_at TIMESTAMPTZ DEFAULT NOW()
                 )
             `);
 
             await this.executeQuery(`
-                CREATE TABLE IF NOT EXISTS orders (
+                CREATE TABLE orders (
                     order_id SERIAL PRIMARY KEY,
                     product_id INT REFERENCES products(product_id),
                     quantity_ordered INT NOT NULL,
                     customer_name VARCHAR(50),
 
                     order_date TIMESTAMPTZ DEFAULT NOW()
+                )
+            `);
+            await this.executeQuery(`
+                CREATE TABLE customers (
+                    customer_id SERIAL PRIMARY KEY,
+                    customer_name VARCHAR(100) NOT NULL,
+                    email VARCHAR(100) UNIQUE,
+                    phone VARCHAR(20),
+                    address TEXT,
+                    registered_at TIMESTAMPTZ DEFAULT NOW()
                 )
             `);
             console.log('Products and orders table created or already exists');
