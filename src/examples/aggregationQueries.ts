@@ -17,7 +17,7 @@ export async function getSalesByGroupingSets() {
         ORDER BY customer_name, product_id;
     `;
     const result = await executeQuery(query);
-    return result.rows;
+    return result.rows[0].total_quantity;
 }
 
 // ROLLUP
