@@ -3,16 +3,21 @@ import { executeQuery, initializeTables } from './config/database';
 import { insertProduct, insertMultipleProducts, insertOrder,TProduct,TOrder,queryProducts } from './examples/query';
 import { filterProductsByPrice, filterOrdersByDate } from './examples/filter';
 import { nullifExample, caseExample, coalesceExample, castExample } from './examples/conditional-operators';
-
+import {getSalesByGroupingSets, getSalesByRollup, getSalesByCube} from './examples/aggregationQueries';
+import {getProductsAboveAveragePrice,getTopSellingProducts,getProductDetails} from './examples/cte';
 // Self-executing async function to run the imported code
 (async () => {
     try {
         // 1. Create tables if they don't exist
-        await initializeTables();
+        // await initializeTables();
+        // getSalesByGroupingSets();
+        // getProductsAboveAveragePrice();
+        // getTopSellingProducts(2);
+        getProductDetails(1);
 
         // 2. Insert a test product
-        const productId = await insertProduct({ name: 'Headphones', stock_quantity: 100, price:150 });
-        console.log(`Inserted product with ID: ${productId}`);
+        // const productId = await insertProduct({ name: 'Headphones', stock_quantity: 100, price:150 });
+        // console.log(`Inserted product with ID: ${productId}`);
 
         // 3. Insert multiple products with a transaction
         const productsToInsert: TProduct[] = [
@@ -23,7 +28,7 @@ import { nullifExample, caseExample, coalesceExample, castExample } from './exam
             {  name: 'Chargers', stock_quantity: 150, price:400 },
             {  name: 'adapters', stock_quantity: 300, price:500 },
         ];
-        await insertMultipleProducts(productsToInsert);
+        // await insertMultipleProducts(productsToInsert);
         
         const ordersToAdd: TOrder[] = [
             { order_id: 1, product_id: 1, quantity_ordered: 2, customer_name: 'Mibey', order_date: new Date('2025-04-10') },
@@ -35,11 +40,11 @@ import { nullifExample, caseExample, coalesceExample, castExample } from './exam
             { order_id: 7, product_id: 7, quantity_ordered: 6, customer_name: 'Titus', order_date: new Date('2025-04-16') },
         ];
         
-        await insertMultipleProducts(productsToInsert);
+        // await insertMultipleProducts(productsToInsert);
         // 4. Query all products to verify
-        const products = await queryProducts();
+        // const products = await queryProducts();
         console.log('All products in database:');
-        console.table(products);
+        // console.table(products);
 
         // 5. Delete all products
         // await deleteAllProducts();
