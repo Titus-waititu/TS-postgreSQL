@@ -68,7 +68,6 @@ class Database {
                     product_id INT REFERENCES products(product_id),
                     quantity_ordered INT NOT NULL,
                     customer_name VARCHAR(50),
-                    quantity INT,
 
                     order_date TIMESTAMPTZ DEFAULT NOW()
                 )
