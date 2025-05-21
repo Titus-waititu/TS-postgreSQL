@@ -15,6 +15,23 @@ export interface TOrder {
   customer_name: string;
   order_date?: Date;
 }
+export interface TorderWithProduct {
+    order_id: number;
+    product_id: number;
+    quantity_ordered: number;
+    customer_name: string;
+    order_date: Date;
+    name: string;
+    stock_quantity: number;
+    price: number;
+}
+export interface TCustomer{
+     customer_name: string,
+     email: string,
+     phone: string,
+     address: string,
+     registered_at: Date,
+}
 
 export const insertProduct = async (product: TProduct): Promise<number> => {
   try {
@@ -65,13 +82,52 @@ export const insertOrder = async (order: TOrder): Promise<number> => {
     console.error("Error inserting order:", error);
     throw error;
   }
+};    
+export const insertCustomer = async (customer: TCustomer): Promise<number> => {
+  try {
+    const { customer_name, email, phone, address, registered_at } = customer;
+    const result = await executeQuery(
+      "INSERT INTO customers (customer_name, email, phone, address, registered_at) VALUES ($1, $2, $3, $4, $5) RETURNING customer_id",
+      [customer_name, email, phone, address, registered_at]
+    );
+    return result.rows[0].customer_id;
+  } catch (error) {
+    console.error("Error inserting customer:", error);
+    throw error;
+  }
 };
+// Query orders with product details using INNER JOIN
+export const getOrdersWithProductInfo = async (): Promise<TorderWithProduct[]> => {
+    try {
+        const res = await executeQuery(
+            `SELECT o.order_id, o.product_id, o.quantity_ordered, o.customer_name, o.order_date,
+                    p.name, p.stock_quantity, p.price
+             FROM orders o
+             INNER JOIN products p ON o.product_id = p.product_id`
+        );
+        return res.rows as TorderWithProduct[];
+    } catch (err) {
+        console.error('Error querying joined data:', err);
+        throw err;
+    }
+};
+
 export const queryProducts = async (): Promise<TProduct[]> => {
   try {
     const result = await executeQuery("SELECT * FROM products");
     return result.rows;
   } catch (error) {
     console.error("Error querying products:", error);
+    throw error;
+  }
+};
+
+export const queryOrders = async (): Promise<TProduct[]> => {
+  try {
+    const result = await executeQuery("SELECT * FROM orders");
+    return result.rows;
+  } catch (error) {
+    console.error("Error querying orders:", error);
     throw error;
   }
 };
