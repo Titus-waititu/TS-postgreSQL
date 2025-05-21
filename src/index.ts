@@ -45,13 +45,13 @@ import  {union,unionAll,intersect,except,excepttwo}  from    './examples/setoper
             await insertOrder(order);
         }     
         const customersToAdd: TCustomer[] = [
-            { customer_name:'mibey', email: 'mibey@example.com', phone: '22730173823', address: 'Mibey street', registered_at: new Date('2025-04-10') },
-            { customer_name:'bruno', email: 'bruno@example.com', phone: '22273017473', address: 'bruno street', registered_at: new Date('2025-04-10') },
-            { customer_name:'tito', email: 'tito@example.com', phone: '2730173213', address: 'tito street', registered_at: new Date('2025-04-10') },
-            { customer_name:'mkubwa', email: 'mkubwa@example.com', phone: '12273017382337', address: 'mkubwa street', registered_at: new Date('2025-04-10') },
-            { customer_name:'mike', email: 'mike@example.com', phone: '27301738233516', address: 'mike street', registered_at: new Date('2025-04-10') },
-            { customer_name:'james', email: 'james@example.com', phone: '227301738236371', address: 'james street', registered_at: new Date('2025-04-10') },
-            { customer_name:'final', email: 'final@example.com', phone: '227301738231238', address: 'final street', registered_at: new Date('2025-04-10') },
+            { customer_name:'Mibey', email: 'mibey@example.com', phone: '22730173823', address: 'Mibey street', registered_at: new Date('2025-04-10') },
+            { customer_name:'Bruno', email: 'bruno@example.com', phone: '22273017473', address: 'bruno street', registered_at: new Date('2025-04-10') },
+            { customer_name:'Tito', email: 'tito@example.com', phone: '2730173213', address: 'tito street', registered_at: new Date('2025-04-10') },
+            { customer_name:'Mkubwa', email: 'mkubwa@example.com', phone: '12273017382337', address: 'mkubwa street', registered_at: new Date('2025-04-10') },
+            { customer_name:'Mike', email: 'mike@example.com', phone: '27301738233516', address: 'mike street', registered_at: new Date('2025-04-10') },
+            { customer_name:'James', email: 'james@example.com', phone: '227301738236371', address: 'james street', registered_at: new Date('2025-04-10') },
+            { customer_name:'Final', email: 'final@example.com', phone: '227301738231238', address: 'final street', registered_at: new Date('2025-04-10') },
         ];
         for (const customer of customersToAdd) {
             await insertCustomer(customer);
