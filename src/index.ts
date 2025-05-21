@@ -5,6 +5,7 @@ import { filterProductsByPrice, filterOrdersByDate } from './examples/filter';
 import { nullifExample, caseExample, coalesceExample, castExample } from './examples/conditional-operators';
 import {getSalesByGroupingSets, getSalesByRollup, getSalesByCube} from './examples/aggregationQueries';
 import {getProductsAboveAveragePrice,getTopSellingProducts,getProductDetails} from './examples/cte';
+import  {union,unionAll,intersect,except,excepttwo}  from    './examples/setoperations';
 // Self-executing async function to run the imported code
 (async () => {
     try {
@@ -65,6 +66,22 @@ import {getProductsAboveAveragePrice,getTopSellingProducts,getProductDetails} fr
 
         // 5. Delete all products
         // await deleteAllProducts();
+
+        //Set Operations
+        const resultUnion=await union();
+        console.log('Union Result:', resultUnion)
+
+        const resultUnionAll=await unionAll();
+        console.log('Union  All Result:', resultUnionAll)
+
+        const resultIntersect=await intersect();
+        console.log('Intersect Result:', resultIntersect)
+
+        const resultExcept=await except();
+        console.log('Except Result:', resultExcept)
+
+        const resultExcepttwo=await excepttwo();
+        console.log('Except Inverse Result:', resultExcepttwo)
 
         console.log('All operations completed successfully');
     } catch (error) {
