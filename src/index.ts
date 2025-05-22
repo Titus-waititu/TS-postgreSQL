@@ -6,6 +6,7 @@ import { nullifExample, caseExample, coalesceExample, castExample } from './exam
 import {getSalesByGroupingSets, getSalesByRollup, getSalesByCube} from './examples/aggregationQueries';
 import {getProductsAboveAveragePrice,getTopSellingProducts,getProductDetails} from './examples/cte';
 import  {union,unionAll,intersect,except,excepttwo}  from    './examples/setoperations';
+import  {performTransactionalModifications}  from    './examples/restoreAndModify';
 // Self-executing async function to run the imported code
 (async () => {
     try {
